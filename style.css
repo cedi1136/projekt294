@@ -1,0 +1,9 @@
+input, button, label{
+    display: block;
+    margin-top: 1rem;
+}
+
+body{
+    max-width: 300px;
+    margin: 0 auto;
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+    <script>
+
+        function createTask(task){
+            fetch('http://127.0.0.1:3000/tasks', {
+                method: 'Post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(task)
+            }).then(() => {
+                alert("Yey.. Task created!");
+            }).catch(() => {
+                alert("Something went wrong! :(");
+            });
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const createTaskForm = document.getElementById('createTaskForm');
+            createTaskForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const createTaskFormData = new FormData(createTaskForm);
+                createTask({title: createTaskFormData.get('title')});
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+    <h2>Create new Task</h2>
+    <label>
+        <form id="createTaskForm">
+            <label for="titleInput">Title</label>
+            <input type="text" name="title" id="titleInput" />
+            <button type="submit">Create</button>
+        </form>
+    </label>
+
+</body>
+
+</html>
